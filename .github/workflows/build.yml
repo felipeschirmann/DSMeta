@@ -35,4 +35,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          TWILIO_KEY: ${{secrets.TWILIO_KEY}}
+          TWILIO_PHONE_FROM: ${{secrets.TWILIO_PHONE_FROM}}
+          TWILIO_PHONE_TO: ${{secrets.TWILIO_PHONE_TO}}
+          TWILIO_SID: ${{secrets.TWILIO_SID}}
         run: mvn -f backend/pom.xml -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=felipeschirmann_DSMeta
