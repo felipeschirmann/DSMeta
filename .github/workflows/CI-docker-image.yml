@@ -1,0 +1,42 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    # defaults:
+    #   run:
+    #     shell: bash
+    #     working-directory: backend
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: 18
+    - name: Move files backend to .
+      run: mv -f backend/* . 
+    - name: Remove frontend
+      run: rm -rf frontend/
+    - name: Build with Maven
+      run: mvn clean install
+    - name: Publish to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+       username: ${{ secrets.DOCKERHUB_USERNAME }}
+       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+       repository: felipeschirmann/ds-meta
+       tags: ${{github.run_number}},latest
