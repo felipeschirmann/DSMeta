@@ -19,7 +19,7 @@ on:
       environment:
         description: "Environment to run tests against"
         type: environment
-        required: true
+        required: true    
   push:
     branches:
       - "main"
@@ -46,6 +46,11 @@ jobs:
         run: rm -rf frontend/
       - name: Build with Maven
         run: mvn clean install
+        env:
+          TWILIO_KEY: ${{ secrets.TWILIO_KEY }}
+          TWILIO_PHONE_FROM: ${{ secrets.TWILIO_PHONE_FROM }}
+          TWILIO_PHONE_TO: ${{ secrets.TWILIO_PHONE_TO }}
+          TWILIO_SID: ${{ secrets.TWILIO_SID }}
       - name: Publish to Docker Hub
         uses: docker/build-push-action@v1
         with:
