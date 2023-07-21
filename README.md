@@ -1,5 +1,5 @@
 # DSMeta
 
-[![SonarCloud Backend ](https://github.com/felipeschirmann/DSMeta/actions/workflows/build.yml/badge.svg)](https://github.com/felipeschirmann/DSMeta/actions/workflows/build.yml)
+[![SonarCloud Backesnd](https://github.com/felipeschirmann/DSMeta/actions/workflows/Sonarcloud-backend.yml/badge.svg)](https://github.com/felipeschirmann/DSMeta/actions/workflows/Sonarcloud-backend.yml)
+[![Docker Image CI](https://github.com/felipeschirmann/DSMeta/actions/workflows/DockerHub-multiplatform-backend.yml/badge.svg)](https://github.com/felipeschirmann/DSMeta/actions/workflows/DockerHub-multiplatform-backend.yml)
 
-[![Docker Image CI](https://github.com/felipeschirmann/DSMeta/actions/workflows/CI-docker-image.yml/badge.svg)](https://github.com/felipeschirmann/DSMeta/actions/workflows/CI-docker-image.yml)
