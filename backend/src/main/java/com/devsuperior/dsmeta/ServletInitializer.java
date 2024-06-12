@@ -1,9 +1,7 @@
-package com.devsuperior.dsmeta.config;
+package com.devsuperior.dsmeta;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-
-import com.devsuperior.dsmeta.DsmetaApplication;
 
 public class ServletInitializer extends SpringBootServletInitializer {
 
