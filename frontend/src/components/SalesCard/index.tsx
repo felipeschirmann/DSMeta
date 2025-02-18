@@ -9,7 +9,8 @@ import { Sale } from "../../models/sale";
 import "./styles.css";
 
 function SalesCard() {
-  const min = new Date(new Date().setDate(new Date().getDate() - 730));
+  const year = 365;
+  const min = new Date(new Date().setDate(new Date().getDate() - (year * 3)));
   const max = new Date();
   const [minDate, setMinDate] = useState(min);
   const [maxDate, setMaxDate] = useState(max);
