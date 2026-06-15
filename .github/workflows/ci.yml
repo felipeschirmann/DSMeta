@@ -55,4 +55,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -f backend/pom.xml -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=felipeschirmann_DSMeta
+          mvn -f backend/pom.xml -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=felipeschirmann_DSMeta -Dsonar.organization=felipeschirmann
