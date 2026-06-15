@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: dsmeta-postgres
+    ports:
+      - "${POSTGRES_PORT:-8381}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-dsmeta_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: ${DOCKER_HUB_USERNAME:-felipeschirmann}/ds-meta:${IMAGE_TAG:-latest}
+    container_name: dsmeta-app
+    ports:
+      - "${APP_PORT:-8380}:8080"
+    environment:
+      APP_PROFILE: ${APP_PROFILE:-homolog}
+      DSMETA_DATABASE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-dsmeta_db}
+      DSMETA_DATABASE_USERNAME: ${POSTGRES_USER:-postgres}
+      DSMETA_DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      DSMETA_BACKEND_PORT: 8080
+      DSMETA_FRONTEND_URL: ${DSMETA_FRONTEND_URL:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

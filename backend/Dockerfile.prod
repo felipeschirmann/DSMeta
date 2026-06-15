@@ -1,0 +1,9 @@
+FROM amazoncorretto:17-alpine
+RUN apk update && apk upgrade && apk --no-cache add curl
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+WORKDIR /opt/app
+COPY target/*.war /opt/app/app.war
+ENTRYPOINT ["java", "-jar", "/opt/app/app.war"]
+HEALTHCHECK --start-interval=30s --interval=10s --timeout=3s --retries=5 \
+  CMD curl -f http://localhost:8080/actuator/health || exit 1
