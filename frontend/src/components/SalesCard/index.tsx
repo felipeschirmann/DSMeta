@@ -50,12 +50,12 @@ function SalesCard() {
           </div>
         </div>
 
-        <div>
+        <div className="dsmeta-sales-table-container">
           <table className="dsmeta-sales-table">
             <thead>
               <tr>
                 <th className="show992">ID</th>
-                <th className="show576">Data</th>
+                <th>Data</th>
                 <th>Vendedor</th>
                 <th className="show992">Visitas</th>
                 <th className="show992">Vendas</th>
@@ -68,7 +68,7 @@ function SalesCard() {
                 return (
                   <tr key={sale.id} >
                     <td className="show992">#{sale.id}</td>
-                    <td className="show576">{new Date(sale.date).toLocaleDateString() }</td>
+                    <td>{new Date(sale.date).toLocaleDateString() }</td>
                     <td>{sale.sellerName}</td>
                     <td className="show992">{sale.visited}</td>
                     <td className="show992">{sale.deals}</td>
