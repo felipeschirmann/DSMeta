@@ -10,6 +10,8 @@ services:
       POSTGRES_DB: dsmeta
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres_local_password
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s
@@ -28,7 +30,7 @@ services:
       DSMETA_DATABASE_USERNAME: postgres
       DSMETA_DATABASE_PASSWORD: postgres_local_password
       DSMETA_BACKEND_PORT: 8080
-      DSMETA_FRONTEND_URL: http://localhost:3000
+      DSMETA_FRONTEND_URL: http://localhost:5173
       TWILIO_SID: mock_sid
       TWILIO_KEY: mock_key
       TWILIO_PHONE_FROM: '+1234567890'
@@ -36,3 +38,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+volumes:
+  postgres_data_dev:
