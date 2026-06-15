@@ -1,5 +1,21 @@
 # DSMeta
 
+<div align="center">
+  <img src="https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17" />
+  <img src="https://img.shields.io/badge/Spring%20Boot-3.3.0-brightgreen?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot" />
+  <img src="https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Docker-Multi--Platform-cyan?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/SonarCloud-Quality%20Gate-success?style=for-the-badge&logo=sonarcloud&logoColor=white" alt="SonarCloud" />
+  <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-blueviolet?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
+  <a href="https://dsmeta-homolog.felipeschirmann.dev.br/swagger-ui.html">
+    <img src="https://img.shields.io/badge/Live%20Demo-Homolog-blue?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Live Demo" />
+  </a>
+</div>
+
+<p align="center">
+  <b>A premium sales tracking backend ecosystem featuring a Spring Boot REST API. Fully dockerized, security-hardened, and orchestrated with modern CI/CD automation.</b>
+</p>
+
 🚀 **DSMeta** is a robust Spring Boot microservice designed to track sales reports and dispatch SMS notifications to highlight top-performing sellers. Developed with clean-code practices, automated test suites, and unified container staging setups.
 
 ---
