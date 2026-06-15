@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import jakarta.persistence.EntityNotFoundException;
 import com.twilio.exception.TwilioException;
@@ -62,64 +63,64 @@ public class SmsServiceTests {
 
     @Test
     public void sendSmsShouldExecuteSuccessfullyWhenSaleExists() {
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         // When/Then - Should run with no errors, activating mock check in SmsService
         service.sendSms(existingId);
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 
     @Test
     public void sendSmsShouldThrowEntityNotFoundExceptionWhenSaleDoesNotExist() {
-        when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+        when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
         // When/Then - Should propagate error from repository
         assertThrows(EntityNotFoundException.class, () -> {
             service.sendSms(nonExistingId);
         });
 
-        verify(repository, times(1)).getReferenceById(nonExistingId);
+        verify(repository, times(1)).findById(nonExistingId);
     }
 
     @Test
     public void sendSmsShouldExecuteSuccessfullyWhenTwilioSidIsNull() {
         ReflectionTestUtils.setField(service, "twilioSid", null);
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         service.sendSms(existingId);
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 
     @Test
     public void sendSmsShouldExecuteSuccessfullyWhenTwilioSidIsEmpty() {
         ReflectionTestUtils.setField(service, "twilioSid", "   ");
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         service.sendSms(existingId);
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 
     @Test
     public void sendSmsShouldExecuteSuccessfullyWhenTwilioSidContainsDummy() {
         ReflectionTestUtils.setField(service, "twilioSid", "dummy_key_test");
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         service.sendSms(existingId);
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 
     @Test
     public void sendSmsShouldExecuteSuccessfullyWhenTwilioSidContainsYour() {
         ReflectionTestUtils.setField(service, "twilioSid", "YOUR_TWILIO_SID");
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         service.sendSms(existingId);
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 
     @Test
@@ -130,7 +131,7 @@ public class SmsServiceTests {
         ReflectionTestUtils.setField(service, "twilioPhoneFrom", "+1234567890");
         ReflectionTestUtils.setField(service, "twilioPhoneTo", "+1987654321");
 
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         // Should try to reach Twilio API and fail with TwilioException (due to invalid credentials or network)
         // This executes and covers Twilio.init and Message.creator lines in the service class.
@@ -138,7 +139,7 @@ public class SmsServiceTests {
             service.sendSms(existingId);
         });
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 
     @Test
@@ -149,7 +150,7 @@ public class SmsServiceTests {
         ReflectionTestUtils.setField(service, "twilioPhoneFrom", "+1234567890");
         ReflectionTestUtils.setField(service, "twilioPhoneTo", "+1987654321");
 
-        when(repository.getReferenceById(existingId)).thenReturn(sale);
+        when(repository.findById(existingId)).thenReturn(Optional.of(sale));
 
         // Mock TwilioRestClient and Response
         TwilioRestClient mockClient = org.mockito.Mockito.mock(TwilioRestClient.class);
@@ -166,6 +167,6 @@ public class SmsServiceTests {
         // Execute service call - this runs the real code block entirely (lines 48-55) without real HTTP requests
         service.sendSms(existingId);
 
-        verify(repository, times(1)).getReferenceById(existingId);
+        verify(repository, times(1)).findById(existingId);
     }
 }
