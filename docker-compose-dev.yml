@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: dsmeta-postgres-dev
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: dsmeta
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_local_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dsmeta-app-dev
+    ports:
+      - "8080:8080"
+    environment:
+      APP_PROFILE: dev
+      DSMETA_DATABASE_URL: jdbc:postgresql://db:5432/dsmeta
+      DSMETA_DATABASE_USERNAME: postgres
+      DSMETA_DATABASE_PASSWORD: postgres_local_password
+      DSMETA_BACKEND_PORT: 8080
+      DSMETA_FRONTEND_URL: http://localhost:3000
+      TWILIO_SID: mock_sid
+      TWILIO_KEY: mock_key
+      TWILIO_PHONE_FROM: '+1234567890'
+      TWILIO_PHONE_TO: '+1234567890'
+    depends_on:
+      db:
+        condition: service_healthy

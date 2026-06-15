@@ -37,6 +37,14 @@ public class SmsService {
 		String msg = "O vendedor " + sale.getSellerName() + " foi destaque em " + date + 
 				" com um total de R$ " + String.format("%.2f", sale.getAmount());
 
+		// Sandbox/Mock protection for local, test and staging environments without real credentials
+		if (twilioSid == null || twilioSid.trim().isEmpty() || twilioSid.toLowerCase().contains("mock") 
+				|| twilioSid.toLowerCase().contains("dummy") || twilioSid.contains("YOUR_")) {
+			String mockSid = "SM" + java.util.UUID.randomUUID().toString().replaceAll("-", "");
+			System.out.println("SMS sent (Mock Sandbox). SID: " + mockSid);
+			return;
+		}
+
 		Twilio.init(twilioSid, twilioKey);
 
 		PhoneNumber to = new PhoneNumber(twilioPhoneTo);
