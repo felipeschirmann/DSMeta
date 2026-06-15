@@ -1,1 +1,13 @@
 .env
+.DS_Store
+readme-local.md
+.gemini/
+task.md
+implementation_plan.md
+walkthrough.md
+view-coverage.sh
+view-swagger.sh
+stop-application.sh
+run-full-suite.sh
+*.log
+postgres-data/
