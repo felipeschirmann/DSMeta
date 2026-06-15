@@ -2,12 +2,20 @@ import logo from "../../assets/img/logo.svg";
 
 import "./styles.css";
 
+const logoImgProps = {
+  src: logo,
+  alt: "DSMeta",
+  fetchPriority: "high",
+  loading: "eager",
+  decoding: "async"
+} as unknown as React.ImgHTMLAttributes<HTMLImageElement>;
+
 function Header() {
   return (
     <>
       <header>
         <div className="dsmeta-logo-container">
-          <img src={logo} alt="DSMeta" />
+          <img {...logoImgProps} />
           <h1>DSMeta</h1>
           <p>
             Desenvolvido por{" "}

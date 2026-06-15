@@ -8,30 +8,50 @@ import { Sale } from "../../models/sale";
 
 import "./styles.css";
 
+const formatLocalDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 function SalesCard() {
-  const year = 365;
-  const min = new Date(new Date().setDate(new Date().getDate() - (year * 5)));
-  const max = new Date();
-  const [minDate, setMinDate] = useState(min);
-  const [maxDate, setMaxDate] = useState(max);
+  const [minDate, setMinDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 365 * 5);
+    return d;
+  });
+  const [maxDate, setMaxDate] = useState(() => new Date());
 
   const [sales, setSales] = useState<Sale[]>([]);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const dateMinFormatedToBackend = formatLocalDate(minDate);
+    const dateMaxFormatedToBackend = formatLocalDate(maxDate);
 
-    const dateMinFormatedToBackend = minDate.toISOString().slice(0,10);
-    const dateMAxFormatedToBackend = maxDate.toISOString().slice(0,10);
-
-    axios.get(`${BASE_URL}/sales?minDate=${dateMinFormatedToBackend}&maxDate=${dateMAxFormatedToBackend}`).then((response) => {
+    axios.get(`${BASE_URL}/sales?minDate=${dateMinFormatedToBackend}&maxDate=${dateMaxFormatedToBackend}`, {
+      signal: controller.signal
+    })
+    .then((response) => {
       setSales(response.data.content);
+    })
+    .catch((error) => {
+      if (!axios.isCancel(error)) {
+        console.error("Error fetching sales data:", error);
+      }
     });
+
+    return () => {
+      controller.abort();
+    };
   }, [minDate, maxDate]);
 
   return (
     <>
       <div className="dsmeta-card">
         <h2 className="dsmeta-sales-title">Vendas</h2>
-        <div>
+        <div className="dsmeta-date-inputs-container">
           <div className="dsmeta-form-control-container">
             <DatePicker
               selected={minDate}

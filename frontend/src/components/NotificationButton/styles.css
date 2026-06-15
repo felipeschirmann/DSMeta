@@ -8,8 +8,30 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+}
+
+.dsmeta-red-btn:hover:not(.dsmeta-disabled) {
+  background: rgba(255, 107, 114, 0.25);
+}
+
+.dsmeta-red-btn:active:not(.dsmeta-disabled) {
+  transform: scale(0.95);
+}
+
+.dsmeta-red-btn.dsmeta-disabled {
+  cursor: not-allowed;
 }
 
 .dsmeta-red-btn img {
   width: 19px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
