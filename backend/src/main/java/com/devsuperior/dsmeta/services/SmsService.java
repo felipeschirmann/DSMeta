@@ -30,7 +30,8 @@ public class SmsService {
 
 	public void sendSms(Long saleId) {
 		
-		Sale sale = saleRepository.getReferenceById(saleId);
+		Sale sale = saleRepository.findById(saleId)
+				.orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Sale not found with id: " + saleId));
 		
 		String date = sale.getDate().getMonthValue() + "/" + sale.getDate().getYear();
 		
