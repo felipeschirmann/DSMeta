@@ -8,18 +8,21 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 0;
+  outline: none;
   transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
 }
 
-.dsmeta-red-btn:hover:not(.dsmeta-disabled) {
+.dsmeta-red-btn:hover:not(.dsmeta-disabled):not(:disabled) {
   background: rgba(255, 107, 114, 0.25);
 }
 
-.dsmeta-red-btn:active:not(.dsmeta-disabled) {
+.dsmeta-red-btn:active:not(.dsmeta-disabled):not(:disabled) {
   transform: scale(0.95);
 }
 
-.dsmeta-red-btn.dsmeta-disabled {
+.dsmeta-red-btn.dsmeta-disabled,
+.dsmeta-red-btn:disabled {
   cursor: not-allowed;
 }
 

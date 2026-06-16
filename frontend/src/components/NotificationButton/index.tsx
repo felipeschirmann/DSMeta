@@ -32,13 +32,15 @@ function NotificationButton({ saleId }: Props) {
 
   return (
     <div className="dsmeta-red-btn-container">
-      <div
+      <button
         className={`dsmeta-red-btn ${loading ? "dsmeta-disabled" : ""}`}
         onClick={handleClick}
+        disabled={loading}
         style={{
-          opacity: loading ? 0.6 : 1,
-          pointerEvents: loading ? "none" : "initial"
+          opacity: loading ? 0.6 : 1
         }}
+        title="Notificar"
+        type="button"
       >
         <img
           src={icon}
@@ -47,7 +49,7 @@ function NotificationButton({ saleId }: Props) {
             animation: loading ? "spin 1s linear infinite" : "none"
           }}
         />
-      </div>
+      </button>
     </div>
   );
 }
