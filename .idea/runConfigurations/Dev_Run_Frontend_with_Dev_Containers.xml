@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="[Dev] Run Frontend (with Dev Containers)" type="js.build_tools.npm" nameIsGenerated="false" folderName="Dev">
+  <configuration default="false" name="[Dev] Run Frontend (with Dev Containers)" type="js.build_tools.npm" nameIsGenerated="false" folderName="Frontend/Dev">
     <package-json value="$PROJECT_DIR$/frontend/package.json" />
     <command value="run" />
     <scripts>

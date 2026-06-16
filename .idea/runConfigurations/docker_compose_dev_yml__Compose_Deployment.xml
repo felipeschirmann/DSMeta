@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="docker-compose-dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" folderName="Dev" server-name="Docker">
+  <configuration default="false" name="docker-compose-dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" folderName="Backend/Dev" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
         <option name="sourceFilePath" value="docker-compose-dev.yml" />

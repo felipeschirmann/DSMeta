@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="[Test] Run Tests (JUnit)" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+  <configuration default="false" name="[Test] Run Tests (JUnit)" type="JUnit" factoryName="JUnit" nameIsGenerated="true" folderName="Backend/Test">
     <module name="dsmeta" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
