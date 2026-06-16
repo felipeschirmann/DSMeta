@@ -7,14 +7,20 @@ on:
     paths:
       - 'backend/**'
       - '!backend/**/*.md'
+      - 'frontend/**'
+      - '!frontend/**/*.md'
       - '.github/workflows/ci.yml'
+      - 'sonar-project.properties'
   pull_request:
     branches:
       - main
     paths:
       - 'backend/**'
       - '!backend/**/*.md'
+      - 'frontend/**'
+      - '!frontend/**/*.md'
       - '.github/workflows/ci.yml'
+      - 'sonar-project.properties'
 
 jobs:
   build-and-test:
@@ -50,9 +56,25 @@ jobs:
         run: |
           mvn -f backend/pom.xml -B verify
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+          cache: 'yarn'
+          cache-dependency-path: frontend/yarn.lock
+
+      - name: Install Frontend Dependencies
+        working-directory: frontend
+        run: |
+          yarn install --frozen-lockfile
+
+      - name: Run Frontend Tests with Coverage
+        working-directory: frontend
+        run: |
+          yarn test:coverage
+
       - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn -f backend/pom.xml -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=felipeschirmann_DSMeta -Dsonar.organization=felipeschirmann
