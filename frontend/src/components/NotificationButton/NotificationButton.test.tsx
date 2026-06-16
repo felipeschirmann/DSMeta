@@ -63,7 +63,14 @@ describe("NotificationButton Component", () => {
       fireEvent.click(btn);
       expect(btn).toHaveClass("dsmeta-disabled");
 
-      fireEvent.click(btn);
+      // Find React's internal handler and call it directly to test the loading guard (if loading return)
+      const propsKey = Object.keys(btn).find(
+        (key) => key.startsWith("__reactProps") || key.startsWith("__reactEventHandlers")
+      );
+      if (propsKey) {
+        // @ts-ignore
+        btn[propsKey].onClick({ preventDefault: () => {} });
+      }
       expect(axios).toHaveBeenCalledTimes(1);
     }
 
@@ -74,6 +81,7 @@ describe("NotificationButton Component", () => {
   });
 
   it("displays error toast when API request fails", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     vi.mocked(axios).mockRejectedValueOnce(new Error("API Error"));
     render(<NotificationButton saleId={42} />);
     const btn = screen.getByAltText("Notificar").closest(".dsmeta-red-btn");
@@ -84,6 +92,8 @@ describe("NotificationButton Component", () => {
     
     await waitFor(() => {
       expect(toast.error).toHaveBeenCalledWith("Erro ao enviar a notificação SMS.");
+      expect(consoleSpy).toHaveBeenCalledWith("Erro ao enviar notificação:", expect.any(Error));
     });
+    consoleSpy.mockRestore();
   });
 });

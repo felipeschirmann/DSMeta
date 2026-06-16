@@ -64,6 +64,19 @@ describe("SalesCard Component", () => {
     consoleSpy.mockRestore();
   });
 
+  it("does not log error when API request is canceled", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { /* noop */ });
+    vi.mocked(axios.isCancel).mockReturnValueOnce(true);
+    vi.mocked(axios.get).mockRejectedValueOnce(new Error("Canceled"));
+    
+    render(<SalesCard />);
+    
+    await waitFor(() => {
+      expect(consoleSpy).not.toHaveBeenCalled();
+    });
+    consoleSpy.mockRestore();
+  });
+
   it("triggers API fetch when min or max date changes", async () => {
     render(<SalesCard />);
     const inputs = screen.getAllByRole("textbox");
