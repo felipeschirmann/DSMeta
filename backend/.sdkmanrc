@@ -1,0 +1,3 @@
+# Enable autoenv in SDKMAN! to load this configuration automatically:
+# sdk config set autoenv true
+java=17.0.10-tem
