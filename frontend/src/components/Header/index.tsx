@@ -5,7 +5,7 @@ import "./styles.css";
 const logoImgProps = {
   src: logo,
   alt: "DSMeta",
-  fetchPriority: "high",
+  fetchpriority: "high",
   loading: "eager",
   decoding: "async"
 } as unknown as React.ImgHTMLAttributes<HTMLImageElement>;

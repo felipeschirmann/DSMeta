@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="[Test] Verify &amp; Coverage (Maven)" type="MavenRunConfiguration" factoryName="Maven">
+  <configuration default="false" name="[Test] Verify &amp; Coverage (Maven)" type="MavenRunConfiguration" factoryName="Maven" folderName="Backend/Test">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings" />
