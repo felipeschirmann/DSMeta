@@ -1,7 +1,8 @@
 .env
 .DS_Store
 readme-local.md
-.gemini/
+.gemini/*
+!.gemini/rules.md
 task.md
 implementation_plan.md
 walkthrough.md
