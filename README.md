@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/Docker-Multi--Platform-cyan?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
   <img src="https://img.shields.io/badge/SonarCloud-Quality%20Gate-success?style=for-the-badge&logo=sonarcloud&logoColor=white" alt="SonarCloud" />
   <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-blueviolet?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
-  <a href="https://dsmeta-homolog.felipeschirmann.dev.br/swagger-ui.html">
+  <a href="https://dsmeta-homolog.felipeschirmann.api.br/swagger-ui.html">
     <img src="https://img.shields.io/badge/Live%20Demo-Homolog-blue?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Live Demo" />
   </a>
 </div>
@@ -62,7 +62,7 @@ To ensure seamless coexistence with other projects (e.g., DSMovie, DSVendas, BDS
 
 | Container Name | Staging Domain / Routing | VM Host Port | Container Port | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
-| **dsmeta-app** | `dsmeta-homolog.felipeschirmann.dev.br` | `8380` | `8080` | Spring Boot Application |
+| **dsmeta-app** | `dsmeta-homolog.felipeschirmann.api.br` | `8380` | `8080` | Spring Boot Application |
 | **dsmeta-postgres** | *Internal connection* | `8381` | `5432` | PostgreSQL Database |
 
 ---
